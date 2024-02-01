@@ -84,7 +84,9 @@ function detectIe() {
   return false
 }
 
-// Defined namespace BrickCms
+/**
+ * The BrickCms class
+ */
 class BrickCms {
   private _name: string
 
@@ -135,6 +137,31 @@ class BrickCms {
    */
   get name() {
     return this._name;
+  }
+
+  /**
+   * our internal cache buster base on 10th of minutes
+   *
+   * yyyyMMddhhm
+   * - this format allow us to cache every 10th minutes
+   * Note: there is no need to worry about timezone
+   * because it should return data base on client's timezone
+   * which is already handled by the data returned here
+   *
+   * @param {Date} date optional date
+   */
+  gcb(date: Date = new Date()) {
+    var tzo = -date.getTimezoneOffset(),
+        dif = tzo >= 0 ? '+' : '-',
+        pad = function(num: number) {
+            return (num < 10 ? '0' : '') + num;
+        };
+
+    return date.getFullYear() +
+        '' + pad(date.getMonth() + 1) +
+        '' + pad(date.getDate()) +
+        '' + pad(date.getHours()) +
+        '' + pad(date.getMinutes())[0]
   }
 
   /**
