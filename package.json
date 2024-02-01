@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "jQuery Plugin for BrickCms",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "webpack",
     "test": "tsc && DEBUG=deep-values nyc ava",
     "report": "tsc && DEBUG=deep-values nyc report --reporter=html",
     "minify": "uglifyjs dist/brickcms.js --source-map --output dist/brickcms.min.js -c -m",
