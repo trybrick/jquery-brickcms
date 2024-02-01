@@ -1,0 +1,21 @@
+{
+  "name": "jquery.brickcms.js",
+  "version": "1.0.0",
+  "description": "jQuery Plugin for BrickCms",
+  "scripts": {
+    "tslint": "tslint ./src/**.ts",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "tsc:es5": "tsc --project tsconfig.json",
+    "build": "npm run tsc:es5",
+    "release": "npm run tslint && npm run build && npm run preparedemo && npm run minify"
+  },
+  "author": "Brick Inc",
+  "license": "PRIVATE",
+  "devDependencies": {
+    "@types/jquery": "^3.5.29",
+    "@types/node": "^20.11.14",
+    "tslint": "^5.20.1",
+    "typescript": "^5.3.3"
+  }
+}
