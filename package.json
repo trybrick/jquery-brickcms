@@ -3,19 +3,20 @@
   "version": "1.0.0",
   "description": "jQuery Plugin for BrickCms",
   "scripts": {
-    "tslint": "tslint ./src/**.ts",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "tsc:es5": "tsc --project tsconfig.json",
-    "build": "npm run tsc:es5",
-    "release": "npm run tslint && npm run build && npm run preparedemo && npm run minify"
+    "build": "tsc --project tsconfig.json",
+    "test": "tsc && DEBUG=deep-values nyc ava",
+    "report": "tsc && DEBUG=deep-values nyc report --reporter=html"
   },
+  "main": "dist/brickcms.js",
+  "types": "dist/brickcms.d.ts",
   "author": "Brick Inc",
   "license": "PRIVATE",
   "devDependencies": {
     "@types/jquery": "^3.5.29",
     "@types/node": "^20.11.14",
-    "tslint": "^5.20.1",
     "typescript": "^5.3.3"
+  },
+  "ava": {
+    "failWithoutAssertions": true
   }
 }

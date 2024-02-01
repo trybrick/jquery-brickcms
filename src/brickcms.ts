@@ -1,8 +1,8 @@
-/// <reference types='jquery'/>
+/// <reference types="jquery" />
 
 // Implement code logic
-// Defined namespace Demo
-module Demo {
+// Defined namespace BrickCms
+module BrickCms {
   // Defined interface config for plugin
   export interface IDemoPluginConfig {
     name?: string;
@@ -38,22 +38,22 @@ interface JQuery {
 }
 // Register plugin JQuery
 (function ($) {
-  $.fn.demoPlugin = function (options?: Demo.IDemoPluginConfig): JQuery {
+  $.fn.demoPlugin = function (options?: BrickCms.IDemoPluginConfig): JQuery {
 
-    let configDefault: Demo.IDemoPluginConfig = {
+    let configDefault: BrickCms.IDemoPluginConfig = {
       name: "JQuery Plugin Template",
       color: 'blue',
       align: 'left'
     };
 
-    let settings: Demo.IDemoPluginConfig;
+    let settings: BrickCms.IDemoPluginConfig;
 
     if (options) {
       settings = $.extend(configDefault, options);
     }
 
     return this.each(function () {
-      let demo = new Demo.DemoPlugin(settings, $(this));
+      let demo = new BrickCms.DemoPlugin(settings, $(this));
     });
   };
 })(jQuery);
