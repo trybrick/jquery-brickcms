@@ -5,7 +5,9 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "test": "tsc && DEBUG=deep-values nyc ava",
-    "report": "tsc && DEBUG=deep-values nyc report --reporter=html"
+    "report": "tsc && DEBUG=deep-values nyc report --reporter=html",
+    "minify": "uglifyjs dist/brickcms.js --source-map --output dist/brickcms.min.js -c -m",
+    "release": "npm run build && npm run minify"
   },
   "main": "dist/brickcms.js",
   "types": "dist/brickcms.d.ts",
@@ -13,10 +15,15 @@
   "license": "PRIVATE",
   "devDependencies": {
     "@types/jquery": "^3.5.29",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.11.14",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "uglify-js": "^3.17.4"
   },
   "ava": {
     "failWithoutAssertions": true
+  },
+  "dependencies": {
+    "js-cookie": "^3.0.5"
   }
 }

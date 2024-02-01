@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Write JQuery Plugins With ">
+    <meta name="author" content="Nguyen Nhu Tuan">
+    <link rel="icon" href="favicon.ico">
+    <title>JQuery Plugins Template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="text-center">Demo Plugin</h1>
+    <div id="demoPlugin"></div>
+
+    <hr/>
+
+    <h1 class="text-center">Demo Widget</h1>
+    <div id="demoWidget">
+        <div class="messages"></div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-9">
+                <input type="text" class="txt-message form-control">
+            </div>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-block btn-primary btn-send">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js "></script>
+    <script src="dist/brickcms.min.js"></script>
+    <script>
+      BrickCms.load(jQuery);
+    </script>
+</body>
+
+</html>
