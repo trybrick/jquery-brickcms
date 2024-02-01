@@ -1,28 +1,7 @@
 {
-    "compileOnSave": false,
     "compilerOptions": {
-        "rootDir": "src",
-        "outDir": "dist",
-        "target": "es5",
-        "module": "es6",     
-        "moduleResolution": "node",
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "allowSyntheticDefaultImports": true,
-        "removeComments": true,
-        "sourceMap": true,
-        "typeRoots": [
-          "node_modules/@types"
-        ],
-        "lib": [
-            "dom",
-            "es2016",
-            "scripthost",
-            "es2015.iterable"
-        ],
-        "types": [
-            "jquery"
-        ]
+        "module": "commonjs",
+        "lib": ["es5", "es6", "dom"],
+        "rootDir": "src"
     }
 }

@@ -1,35 +1,35 @@
+import * as Cookies from 'js-cookie'
+
+// @ts-ignore
+const jQuery = window.jQuery || window.$
+
+
 // Defined namespace BrickCms
-module BrickCms {
-  // @ts-ignore
-  const jQuery = window.jQuery || window.$
+class BrickCmsClass {
+  public myGeo: any;
 
-  // @ts-ignore
-  const Cookies = window.Cookies
+  constructor() {
+  }
 
-  function doGeoIP(jsonpUrl:string, callback: (rst:any) => void) {
+  doGeoIP(jsonpUrl:string, callback: (rst:any) => void) {
     // this.jsonp(jsonpUrl || '//freegeoip.net/json/', callback);
     callback({latitude: 1, longitude: 1})
   }
 
-  // Defined interface config for plugin
-  export const myProperty: string = "Hello, world!"
-
-  export var myGeo: any
-
-  function myStoreId(): string {
+  myStoreId(): string {
     // @ts-ignore
     return Cookies.get('myStoreId');
   }
 
-  export function decode(str: string): string {
+  decode(str: string): string {
     try {
       return decodeURIComponent(str.replace(/\+/g, ' '));
     } catch (e) {
       return str;
     }
-  }
 
-  export function encode(str: string): string {
+  }
+  encode(str: string): string {
     try {
       return encodeURIComponent(str);
     } catch (e) {
@@ -37,11 +37,11 @@ module BrickCms {
     }
   }
 
-  export function queryParseString(qstr: string): any {
+  queryParseString(qstr: string): any {
     qstr = (qstr || '').replace('?', '').replace('#', '')
 
     const pattern = /(\w+)\[(\d+)\]/
-    const decode = BrickCms.decode,
+    const decode = this.decode,
       obj: any = {},
       a = qstr.split('&')
 
@@ -62,8 +62,8 @@ module BrickCms {
     return obj
   }
 
-  export function queryStringify(obj: any, prefix: string): string {
-    const encode = BrickCms.encode
+  queryStringify(obj: any, prefix: string): string {
+    const encode = this.encode
 
     let str = [], p
 
@@ -72,7 +72,7 @@ module BrickCms {
         let k = prefix ? prefix + '[' + p + ']' : p, v = obj[p]
 
         str.push((v !== null && typeof v === 'object') ?
-          BrickCms.queryStringify(v, k) :
+          this.queryStringify(v, k) :
           encode(k) + '=' + encode(v))
       }
     }
@@ -80,7 +80,7 @@ module BrickCms {
     return str.join('&')
   }
 
-  export function geoDistance(latitude1: number, longitude1: number, latitude2: number, longitude2: number, options:any) {
+  geoDistance(latitude1: number, longitude1: number, latitude2: number, longitude2: number, options:any) {
     options = options || {};
 
     function toRad(num: number) {
@@ -105,21 +105,26 @@ module BrickCms {
     return R * c;
   }
 
-  export function geoOrderByOrigin(points: Array<any>, origin: any, callback: any) {
+  geoOrderByOrigin(points: Array<any>, origin: any, callback: any) {
     const results: Array<any> = [];
 
     points.forEach((point) => {
-      const d = BrickCms.geoDistance(origin.Latitude, origin.Longitude, point.Latitude, point.Longitude, { unit: 'mile' });
+      const d = this.geoDistance(origin.Latitude, origin.Longitude, point.Latitude, point.Longitude, { unit: 'mile' });
       const newPoint = { point: point, distance: d };
 
       results.push(newPoint);
     });
 
-    BrickCms.sortOn(results, 'distance');
+    this.sortOn(results, 'distance');
     callback({origin: origin, results: results });
   }
 
-  export function sortOn(collection: Array<any>, name: string) {
+  storeSelect(storeId: string) {
+    // @ts-ignore
+    Cookies.set('myStoreId', storeId);
+  }
+
+  sortOn(collection: Array<any>, name: string) {
     if (! collection) return null;
     if (collection.length <= 0) return [];
 
@@ -141,17 +146,15 @@ module BrickCms {
     return collection;
   }
 
-  export function storeSelect(storeId: string) {
-    // @ts-ignore
-    Cookies.set('myStoreId', storeId);
-  }
+  load() {
+    const that: any = this;
 
-  export function load() {
     // do loading
     // 1. automatic geocode ip address and store it on $brx.myGeo
     jQuery.getJSON('https://cdn2.brickinc.net/geoipme/?buster=' + (new Date().getTime()), (rst:any) => {
-      BrickCms.myGeo = rst;
-      debugger;
+      that.myGeo = rst;
     })
   }
 }
+
+export = new BrickCmsClass()

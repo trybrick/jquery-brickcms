@@ -1,5 +1,5 @@
 {
-  "name": "jquery.brickcms.js",
+  "name": "jquery-brickcms",
   "version": "1.0.0",
   "description": "jQuery Plugin for BrickCms",
   "scripts": {
@@ -7,18 +7,20 @@
     "test": "tsc && DEBUG=deep-values nyc ava",
     "report": "tsc && DEBUG=deep-values nyc report --reporter=html",
     "minify": "uglifyjs dist/brickcms.js --source-map --output dist/brickcms.min.js -c -m",
-    "release": "npm run build && npm run minify"
+    "release": "webpack && npm run minify"
   },
   "main": "dist/brickcms.js",
-  "types": "dist/brickcms.d.ts",
   "author": "Brick Inc",
   "license": "PRIVATE",
   "devDependencies": {
     "@types/jquery": "^3.5.29",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.11.14",
+    "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
-    "uglify-js": "^3.17.4"
+    "uglify-js": "^3.17.4",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4"
   },
   "ava": {
     "failWithoutAssertions": true
