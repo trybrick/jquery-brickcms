@@ -5,17 +5,17 @@ declare global {
   interface Window {
     $: JQueryStatic
     jQuery: JQueryStatic
-  }
-
-  interface Global {
-    window: Window
-    document: Document
-    navigator: Navigator
+    Zepto: JQueryStatic
   }
 }
 
 var undef: any,
- myRoot = { document: {}, navigator: { userAgent: '' }, location: { protocol: 'file', hostname: '' } }
+  myRoot = {
+    document: {},
+    navigator: { userAgent: '' },
+    location: { protocol: 'file', hostname: '' },
+    jQuery: {}
+  }
 
 // Establish the object that gets returned to break out of a loop iteration.
 const breaker = {}
@@ -33,6 +33,7 @@ function isNull(obj: any, defaultValue: any): any {
 
 if (typeof (window) !== 'undefined') {
   myRoot = window
+  myRoot.jQuery = window.jQuery || window.Zepto || window.$
 }
 
 /**
@@ -117,7 +118,7 @@ class BrickCms {
     that.cookies = Cookies
     that.win = myRoot
     that.doc = myRoot.document
-    that.jq  = jQuery || $
+    that.jq  = myRoot.jQuery
 
     that.keys = keys
     that.isNull = isNull
