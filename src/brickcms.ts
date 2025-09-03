@@ -408,7 +408,7 @@ class BrickCms {
     const myCustomEvent = new CustomEvent<any>('storeSelected', {
       bubbles: true,
       cancelable: true,
-      detail:{ storeId: storeId }
+      detail: { myStoreId: storeId }
     });
     element.dispatchEvent(myCustomEvent);
   }

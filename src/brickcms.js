@@ -366,7 +366,7 @@ var BrickCms = /** @class */ (function () {
         var myCustomEvent = new CustomEvent('storeSelected', {
             bubbles: true,
             cancelable: true,
-            detail: { storeId: storeId }
+            detail: { myStoreId: storeId }
         });
         element.dispatchEvent(myCustomEvent);
     };
