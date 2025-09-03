@@ -125,11 +125,22 @@ class BrickCms {
 
     // begin
     // 1. automatic geocode ip address and store it
-    this.jq.getJSON('https://cdn2.brickinc.net/geoipme/?buster=' + (new Date().getTime()), (rst: any) => {
-      if (rst.latitude) {
-        that.myGeo = rst
-      }
-    })
+    let url = 'https://cdn2.brickinc.net/geoipme/?buster=' + (new Date().getTime());
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(rst => {
+        if (rst.latitude) {
+          that.myGeo = rst
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching geoip:', error);
+      });
   }
 
   /**
@@ -205,12 +216,13 @@ class BrickCms {
       group.items.push(item)
     });
 
-    this.jq.each(grouper, (i: number, myGroup: any) => {
-      myGroup.$idx = i
-      groups.push(myGroup)
+    // let i = 0;
+    for (const [key, value] of Object.entries(grouper)) {
+      // value.$idx = i++;
+      groups.push(value)
 
-      if (postProcessFunction) postProcessFunction(myGroup)
-    })
+      if (postProcessFunction) postProcessFunction(value)
+    }
 
     return this.sortOn(groups, 'key')
   }

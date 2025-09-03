@@ -13,14 +13,14 @@
   "author": "Brick Inc",
   "license": "PRIVATE",
   "devDependencies": {
-    "@types/jquery": "^3.5.29",
+    "@types/jquery": "^3.5.33",
     "@types/js-cookie": "^3.0.6",
-    "@types/node": "^20.11.14",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
-    "uglify-js": "^3.17.4",
-    "webpack": "^5.90.0",
-    "webpack-cli": "^5.1.4"
+    "@types/node": "^24.3.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.2",
+    "uglify-js": "^3.19.3",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
   },
   "ava": {
     "failWithoutAssertions": true
