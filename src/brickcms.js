@@ -296,8 +296,8 @@ var BrickCms = /** @class */ (function () {
     BrickCms.prototype.queryStringify = function (obj, prefix) {
         var that = this;
         var encode = that.encode;
-        var str = [], p;
-        for (p in obj) {
+        var str = [];
+        for (var p in obj) {
             if (obj.hasOwnProperty(p)) {
                 var k = prefix ? prefix + '[' + p + ']' : p, v = obj[p];
                 str.push((v !== null && typeof v === 'object') ?
@@ -362,7 +362,13 @@ var BrickCms = /** @class */ (function () {
     BrickCms.prototype.storeSelect = function (storeId) {
         Cookies.set('myStoreId', storeId);
         // trigger event so client can reload page, if required
-        this.jq("head").trigger('storeSelected', { store: storeId });
+        var element = this.doc.getElementByTagName('head');
+        var myCustomEvent = new CustomEvent('storeSelected', {
+            bubbles: true,
+            cancelable: true,
+            detail: { storeId: storeId }
+        });
+        element.dispatchEvent(myCustomEvent);
     };
     /**
      * sort a list of object base on some property name

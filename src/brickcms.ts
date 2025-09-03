@@ -125,7 +125,7 @@ class BrickCms {
 
     // begin
     // 1. automatic geocode ip address and store it
-    let url = 'https://cdn2.brickinc.net/geoipme/?buster=' + (new Date().getTime());
+    const url = 'https://cdn2.brickinc.net/geoipme/?buster=' + (new Date().getTime());
     fetch(url)
       .then(response => {
         if (!response.ok) {
@@ -325,9 +325,9 @@ class BrickCms {
     const that   = this
     const encode = that.encode
 
-    let str = [], p
+    let str = [];
 
-    for (p in obj) {
+    for (let p in obj) {
       if (obj.hasOwnProperty(p)) {
         let k = prefix ? prefix + '[' + p + ']' : p, v = obj[p]
 
@@ -404,7 +404,13 @@ class BrickCms {
     Cookies.set('myStoreId', storeId)
 
     // trigger event so client can reload page, if required
-    this.jq("head").trigger('storeSelected', { store: storeId })
+    const element = this.doc.getElementByTagName('head');
+    const myCustomEvent = new CustomEvent<any>('storeSelected', {
+      bubbles: true,
+      cancelable: true,
+      detail:{ storeId: storeId }
+    });
+    element.dispatchEvent(myCustomEvent);
   }
 
   /**
